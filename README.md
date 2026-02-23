@@ -1,6 +1,3 @@
-:
-
-
 # TheNull V2ray Tool Kit
 
 Developed by ElectVPN0 Team
