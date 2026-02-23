@@ -1,4 +1,4 @@
-حتماً، کل متن رو با تگ ``` اول و آخر گذاشتم تا بتونی کامل کپی کنی:
+:
 
 
 # TheNull V2ray Tool Kit
@@ -26,7 +26,7 @@ Node.js 18 or newer
 ## Clone project
 ```bash
 git clone https://github.com/yourname/thenull-v2ray-toolkit.git
-cd thenull-v2ray-toolkit
+cd v2raytoolkit
 ```
 
 ## Install dependencies
