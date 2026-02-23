@@ -1,105 +1,279 @@
-All changes below are released under version 1.0.0  
-(no version bump).
+# TheNull V2ray Tool Kit
+
+Developed by @ElectVPN0 Team ( on telegram ) 
+
+Telegram channels  
+https://t.me/electvpn0  
+https://t.me/nullop2  
+
+⭐ Please support the project by giving us a star on GitHub  
+⭐ لطفاً برای حمایت از پروژه به ما در گیتهاب استار بدهید
 
 ---
 
-## UI & animation improvements
-
-- Fixed harsh and abrupt animations
-- Improved easing curves for all transitions
-- Fixed panel open / close animation glitches
-- Fixed layout jumping when switching tools
-- Improved top bar animation for language, theme and palette changes
+Version: 1.0.0
 
 ---
 
-## Layout behavior fixes
+# INSTALL
 
-- Only the active tool panel expands
-- Other panels stay collapsed
-- Fixed unwanted page reflow while typing inside inputs
+## Requirements
 
----
+Node.js 18 or newer
 
-## Theme & color system
+## Clone project
 
-- Removed old color slider completely
-- Added multi‑palette system
-- All palettes now work correctly in both light and dark modes
-- Added global panel opacity control
-- Fixed mismatched colors between light and dark cards
+```bash
+git clone https://github.com/yourname/thenull-v2ray-toolkit.git
+cd thenull-v2ray-toolkit
+````
 
----
+## Install dependencies
 
-## Language system
+```bash
+npm install
+```
 
-- Fixed incomplete text replacement
-- Implemented true language switching (no overlay texts)
-- Added new languages:
-  - Arabic
-  - German
-  - Spanish
-  - Italian
-  - Indonesian
+## Run server
 
----
+```bash
+node server.js
+```
 
-## GitHub & Telegram integration
+Open in browser:
 
-- Added GitHub project button in top bar
-- Added live GitHub star counter
-- Added star button that redirects to project page
-- Added Telegram channel buttons in top bar
+[http://localhost:3000](http://localhost:3000)
 
 ---
 
-## Rename engine fixes
+# README (English)
 
-- Fixed rename not being applied to actual config name
-- Fixed inconsistent auto numbering
-- Unified rename behavior across all tools
-- Fixed rename after ping test
-- Fixed missing country flag inside renamed output
+## About
 
----
+TheNull V2ray Tool Kit is a modern web-based toolkit for managing, converting and testing
+V2Ray / Xray configurations.
 
-## Ping engine fixes
-
-- Improved real TCP latency test stability
-- Fixed ping timeout handling
-- Fixed incorrect host parsing in some configs
-- Added copy button to ping results
+This tool is designed for real world usage, real TCP testing and a modern user experience.
 
 ---
 
-## JSON converter fixes
+## Features (v1.0.0)
 
-- Fixed multiple outbound handling
-- Fixed converter crash on mixed inbound / outbound layouts
-- Added unified rename and numbering support
+* Batch rename for:
+
+  * VLESS
+  * VMess
+  * Trojan
+  * Shadowsocks
+
+* Unified rename engine for all tools
+
+* Automatic numbering when multiple configs are renamed
+
+* Rename format engine:
+
+  Country flag | ping - custom name
+
+  Example:
+  🇩🇪 | 129ms - MyConfig
+
+* JSON to link converter:
+
+  * VLESS
+  * VMess
+  * Trojan
+
+* One JSON can be converted to multiple protocols
+
+* Real TCP latency test (server side)
+
+* Country detection and country flag rendering
+
+* Copy button for all outputs with visual confirmation
+
+* Output is cleared automatically when input is cleared
+
+* Separate panel for NPVT file inspection
+
+* NPVT inspector supports:
+
+  * raw JSON
+  * base64 JSON
+  * base64 + gzip JSON
+  * encrypted / locked file detection
+
+* Only the active tool panel expands
+  other panels remain collapsed
 
 ---
 
-## NPVT inspector fixes
+## Theme & colors
 
-- Fixed base64 detection
-- Fixed base64 + gzip decoding failures
-- Added locked / encrypted file detection
-- Added clearer visual status for NPVT files
+* Light and Dark themes
+
+* Multiple built-in color palettes (no sliders):
+
+  * Blue
+  * Orange
+  * Violet
+  * Emerald
+  * Red
+  * Cyan
+  * Pink
+  * Amber
+  * Lime
+  * Indigo
+
+* All colors work inside both light and dark themes
+
+* Global panel opacity control
+
+* Old color slider has been completely removed
 
 ---
 
-## Input / output behavior
+## Multi-language support
 
-- Fixed output not clearing when input is cleared
-- Fixed copy button not responding on large outputs
-- Added copy confirmation animation
+True language replacement system (not overlay).
+
+Supported languages:
+
+* English
+* Persian (فارسی)
+* French
+* Portuguese
+* Turkish
+* Russian
+* Arabic
+* German
+* Spanish
+* Italian
+* Indonesian
 
 ---
 
-## Performance & stability
+## Community
 
-- Reduced unnecessary DOM re‑rendering
-- Improved large text paste performance
-- Improved animation performance
-- Improved internal state handling for theme and language switches
+Telegram channels:
+
+[https://t.me/electvpn0](https://t.me/electvpn0)
+[https://t.me/nullop2](https://t.me/nullop2)
+
+⭐ Please support us by starring the project on GitHub.
+
+---
+
+# README (فارسی)
+
+## معرفی پروژه
+
+TheNull V2ray Tool Kit یک ابزار تحت وب مدرن برای مدیریت، تبدیل و تست
+کانفیگ‌های V2Ray و Xray می‌باشد.
+
+این ابزار برای استفاده واقعی و تست واقعی شبکه طراحی شده است.
+
+---
+
+## امکانات نسخه 1.0.0
+
+* تغییر نام گروهی کانفیگ‌های:
+
+  * VLESS
+  * VMess
+  * Trojan
+  * Shadowsocks
+
+* موتور تغییر نام یکپارچه برای تمام ابزارها
+
+* شماره‌گذاری خودکار در تمام بخش‌ها
+
+* فرمت تغییر نام:
+
+  پرچم کشور | پینگ - نام دلخواه
+
+  مثال:
+  🇩🇪 | 129ms - MyConfig
+
+* تبدیل JSON به لینک:
+
+  * VLESS
+  * VMess
+  * Trojan
+
+* امکان تبدیل یک JSON به چند پروتکل
+
+* تست پینگ واقعی TCP از سمت سرور
+
+* تشخیص کشور و نمایش پرچم کشور
+
+* دکمه کپی برای تمام خروجی‌ها همراه با نمایش پیام کپی
+
+* با پاک شدن ورودی، خروجی همان بخش نیز پاک می‌شود
+
+* بخش جداگانه برای بررسی فایل NPVT
+
+* پشتیبانی NPVT از:
+
+  * JSON خام
+  * JSON به صورت base64
+  * JSON به صورت base64 + gzip
+  * تشخیص فایل‌های قفل شده
+
+* فقط همان پنلی که در حال استفاده است باز می‌شود
+  سایر پنل‌ها بسته می‌مانند
+
+---
+
+## تم و رنگ‌ها
+
+* حالت شب و روز
+
+* پالت‌های رنگی داخلی (بدون اسلایدر):
+
+  * آبی
+  * نارنجی
+  * بنفش
+  * سبز
+  * قرمز
+  * فیروزه‌ای
+  * صورتی
+  * کهربایی
+  * لیمویی
+  * نیلی
+
+* تمامی رنگ‌ها در هر دو حالت شب و روز فعال هستند
+
+* کنترل شفافیت کلی پنل‌ها
+
+* اسلایدر قدیمی تغییر رنگ حذف شده است
+
+---
+
+## پشتیبانی از زبان‌ها
+
+سیستم جایگزینی واقعی متن‌ها
+
+زبان‌های پشتیبانی‌شده:
+
+* فارسی
+* انگلیسی
+* فرانسوی
+* پرتغالی
+* ترکی
+* روسی
+* عربی
+* آلمانی
+* اسپانیایی
+* ایتالیایی
+* اندونزیایی
+
+---
+
+## ارتباط با ما
+
+کانال‌های تلگرام:
+
+[https://t.me/electvpn0](https://t.me/electvpn0)
+[https://t.me/nullop2](https://t.me/nullop2)
+
+⭐ در صورت رضایت از پروژه، لطفاً به ما در گیتهاب استار بدهید
