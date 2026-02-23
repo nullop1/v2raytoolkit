@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TheNull V2ray Tool Kit</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root{
+--accent:210;
+--bg:#020617;
+--fg:#ffffff;
+--ease:cubic-bezier(.22,.61,.36,1);
+}
+
+body{
+background:var(--bg);
+color:var(--fg);
+transition:background .4s,color .4s;
+}
+
+.panel{
+transition:all .45s var(--ease);
+transform:translateY(0);
+}
+
+.panel.active{
+transform:translateY(12px) scale(1.01);
+box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+.fade{
+animation:fade .35s var(--ease);
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(6px)}
+to{opacity:1}
+}
+
+.toast{
+position:fixed;
+right:20px;
+bottom:20px;
+background:hsl(var(--accent) 90% 45%);
+color:#fff;
+padding:10px 16px;
+border-radius:10px;
+opacity:0;
+pointer-events:none;
+transition:.3s;
+}
+
+.toast.show{opacity:1}
+
+.slider::-webkit-slider-thumb{
+appearance:none;
+width:16px;height:16px;border-radius:50%;
+background:hsl(var(--accent) 90% 50%);
+}
+
+header{
+animation:fade .5s var(--ease);
+}
+</style>
+</head>
+
+<body>
+
+<div id="app" class="max-w-7xl mx-auto p-6 space-y-6">
+
+<header class="flex flex-wrap items-center justify-between gap-4">
+
+<div>
+<div class="text-3xl font-bold" style="color:hsl(var(--accent) 90% 50%)">
+TheNull V2ray Tool Kit
+</div>
+<div class="text-sm text-slate-400">
+by electvpn0 team – Telegram
+</div>
+</div>
+
+<div class="flex items-center gap-3">
+
+<a id="githubBtn" target="_blank"
+class="px-3 py-2 rounded bg-slate-800 hover:bg-slate-700 text-sm">
+⭐ <span id="starCount">…</span>
+</a>
+
+<a target="_blank" href="https://t.me/nullop2/"
+class="px-3 py-2 rounded bg-slate-800 hover:bg-slate-700 text-sm">
+Telegram
+</a>
+
+<select id="lang" class="rounded bg-slate-800 p-2 text-sm">
+<option value="en">English</option>
+<option value="fa">فارسی</option>
+<option value="tr">Türkçe</option>
+<option value="ru">Русский</option>
+<option value="ar">العربية</option>
+</select>
+
+<button id="themeBtn" class="rounded bg-slate-800 px-3 py-2 text-sm">
+🌗
+</button>
+
+<input id="accent" type="range" min="0" max="360" value="210"
+class="slider w-24">
+
+</div>
+</header>
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+<div class="panel bg-slate-900 p-4 rounded-xl">
+<h2 data-i="rename" class="font-semibold mb-2"></h2>
+<textarea id="renameIn" class="w-full h-32 bg-slate-800 rounded p-2"></textarea>
+<input id="renameName" class="w-full mt-2 bg-slate-800 rounded p-2" placeholder="Name">
+<div class="flex gap-2 mt-2">
+<button onclick="renameAll()" class="flex-1 rounded p-2 bg-sky-600">Run</button>
+<button onclick="copyOut(renameOut)" class="flex-1 rounded p-2 bg-emerald-600">Copy</button>
+</div>
+<pre id="renameOut" class="mt-2 text-xs max-h-40 overflow-auto"></pre>
+</div>
+
+<div class="panel bg-slate-900 p-4 rounded-xl">
+<h2 data-i="json" class="font-semibold mb-2"></h2>
+<textarea id="jsonIn" class="w-full h-32 bg-slate-800 rounded p-2"></textarea>
+<input id="jsonName" class="w-full mt-2 bg-slate-800 rounded p-2" placeholder="Name">
+<div class="flex gap-2 mt-2">
+<button onclick="convertAll()" class="flex-1 rounded p-2 bg-sky-600">Convert</button>
+<button onclick="copyOut(jsonOut)" class="flex-1 rounded p-2 bg-emerald-600">Copy</button>
+</div>
+<pre id="jsonOut" class="mt-2 text-xs max-h-40 overflow-auto"></pre>
+</div>
+
+<div class="panel bg-slate-900 p-4 rounded-xl">
+<h2 data-i="test" class="font-semibold mb-2"></h2>
+<textarea id="testIn" class="w-full h-32 bg-slate-800 rounded p-2"></textarea>
+<input id="testName" class="w-full mt-2 bg-slate-800 rounded p-2" placeholder="Name">
+<div class="flex gap-2 mt-2">
+<button onclick="runTest()" class="flex-1 rounded p-2 bg-sky-600">Test</button>
+<button onclick="copyOut(testOut)" class="flex-1 rounded p-2 bg-emerald-600">Copy</button>
+</div>
+<pre id="testOut" class="mt-2 text-xs max-h-40 overflow-auto"></pre>
+</div>
+
+</div>
+
+<div class="panel bg-slate-900 p-4 rounded-xl">
+<h2 data-i="npvt" class="font-semibold mb-3"></h2>
+
+<div class="flex gap-3">
+<input type="file" id="npvtFile" class="flex-1 bg-slate-800 rounded p-2">
+<button onclick="uploadNpvt()" class="rounded p-2 bg-sky-600">Open</button>
+<button onclick="copyOut(npvtOut)" class="rounded p-2 bg-emerald-600">Copy</button>
+</div>
+
+<pre id="npvtOut" class="mt-3 text-xs max-h-64 overflow-auto"></pre>
+</div>
+
+<div class="panel bg-slate-900 p-4 rounded-xl">
+<h2 data-i="unlock" class="font-semibold mb-2"></h2>
+<textarea id="unlockIn" class="w-full h-32 bg-slate-800 rounded p-2"></textarea>
+<div class="flex gap-2 mt-2">
+<button onclick="unlockCfg()" class="flex-1 rounded p-2 bg-sky-600">Convert</button>
+<button onclick="copyOut(unlockOut)" class="flex-1 rounded p-2 bg-emerald-600">Copy</button>
+</div>
+<pre id="unlockOut" class="mt-2 text-xs max-h-40 overflow-auto"></pre>
+</div>
+
+</div>
+
+<div id="toast" class="toast">Copied</div>
+
+<script>
+const repo="nullop1/v2raytoolkit/"
+githubBtn.href="https://github.com/"+repo
+
+fetch("https://api.github.com/repos/"+repo)
+.then(r=>r.json()).then(j=>{
+if(j.stargazers_count!=null)
+starCount.textContent=j.stargazers_count
+})
+
+const dict={
+en:{rename:"Rename links",json:"JSON to links",test:"Real TCP test",npvt:"NPVT decompiler",unlock:"Lock‑Net cleaner"},
+fa:{rename:"تغییر نام کانفیگ‌ها",json:"تبدیل JSON به لینک",test:"تست واقعی TCP",npvt:"باز کردن npvt",unlock:"حذف لاک نت مود"},
+tr:{rename:"Yeniden adlandır",json:"JSON → link",test:"TCP test",npvt:"NPVT aç",unlock:"Lock temizle"},
+ru:{rename:"Переименование",json:"JSON в ссылки",test:"TCP тест",npvt:"NPVT",unlock:"Удаление lock"},
+ar:{rename:"إعادة التسمية",json:"JSON إلى روابط",test:"اختبار TCP",npvt:"فتح NPVT",unlock:"إزالة lock"}
+}
+
+function applyLang(l){
+document.querySelectorAll('[data-i]').forEach(e=>{
+e.textContent=dict[l][e.dataset.i]
+})
+}
+
+lang.onchange=()=>{
+app.classList.add('fade')
+applyLang(lang.value)
+setTimeout(()=>app.classList.remove('fade'),300)
+}
+
+let dark=true
+themeBtn.onclick=()=>{
+dark=!dark
+document.body.style.setProperty('--bg',dark?'#020617':'#ffffff')
+document.body.style.setProperty('--fg',dark?'#ffffff':'#0f172a')
+document.querySelectorAll('.panel').forEach(p=>{
+p.classList.toggle('bg-slate-900',dark)
+p.classList.toggle('bg-slate-100',!dark)
+})
+document.querySelectorAll('textarea,input,select').forEach(i=>{
+i.classList.toggle('bg-slate-800',dark)
+i.classList.toggle('bg-white',!dark)
+})
+app.classList.add('fade')
+setTimeout(()=>app.classList.remove('fade'),300)
+}
+
+accent.oninput=()=>{
+document.documentElement.style.setProperty('--accent',accent.value)
+}
+
+const panels=[...document.querySelectorAll('.panel')]
+document.addEventListener('focusin',e=>{
+panels.forEach(p=>p.classList.remove('active'))
+let p=e.target.closest('.panel')
+if(p)p.classList.add('active')
+})
+
+function toastShow(){
+toast.classList.add('show')
+setTimeout(()=>toast.classList.remove('show'),900)
+}
+
+function copyOut(el){
+navigator.clipboard.writeText(el.textContent||'')
+toastShow()
+}
+
+renameIn.oninput=()=>{if(!renameIn.value.trim())renameOut.textContent='' }
+jsonIn.oninput=()=>{if(!jsonIn.value.trim())jsonOut.textContent='' }
+testIn.oninput=()=>{if(!testIn.value.trim())testOut.textContent='' }
+unlockIn.oninput=()=>{if(!unlockIn.value.trim())unlockOut.textContent='' }
+
+function renameAll(){
+let l=renameIn.value.split('\n').filter(x=>x.trim())
+let n=renameName.value||'TheNull'
+let o=[],i=1
+for(let x of l){
+o.push(x.split('#')[0]+'#'+n+'-'+i++)
+}
+renameOut.textContent=o.join('\n')
+}
+
+function convertAll(){
+let j=JSON.parse(jsonIn.value)
+let n=jsonName.value||'TheNull'
+let o=[],i=1
+for(let x of (j.outbounds||[])){
+let h=x.settings?.vnext?.[0]?.address||x.settings?.servers?.[0]?.address
+let p=x.settings?.vnext?.[0]?.port||x.settings?.servers?.[0]?.port
+let id=x.settings?.vnext?.[0]?.users?.[0]?.id||x.settings?.servers?.[0]?.password
+if(!h||!p||!id)continue
+o.push(`vless://${id}@${h}:${p}?encryption=none#${n}-${i}`)
+o.push(`trojan://${id}@${h}:${p}#${n}-${i}`)
+let v={v:"2",ps:n+"-"+i,add:h,port:String(p),id:id,aid:"0",net:"tcp",type:"none",host:"",path:"",tls:""}
+o.push("vmess://"+btoa(JSON.stringify(v)))
+i++
+}
+jsonOut.textContent=o.join('\n')
+}
+
+async function runTest(){
+let l=testIn.value.split('\n').filter(x=>x.trim())
+let n=testName.value||'TheNull'
+if(!l.length){testOut.textContent='';return}
+testOut.textContent='Testing...'
+let r=await fetch('/api/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({configs:l,name:n})})
+let j=await r.json()
+testOut.textContent=j.join('\n')
+}
+
+async function uploadNpvt(){
+let f=npvtFile.files[0]
+if(!f)return
+let fd=new FormData()
+fd.append('file',f)
+npvtOut.textContent='Processing...'
+let r=await fetch('/api/npvt',{method:'POST',body:fd})
+let j=await r.json()
+if(j.ok) npvtOut.textContent=JSON.stringify(j.data,null,2)
+else if(j.locked) npvtOut.textContent='Locked / encrypted NPVT'
+else npvtOut.textContent='Invalid file'
+}
+
+function unlockCfg(){
+let l=unlockIn.value.split('\n').filter(x=>x.trim())
+let o=[]
+for(let x of l){
+o.push(x.replace(/(&?security=xtls|&?flow=[^&]+)/gi,''))
+}
+unlockOut.textContent=o.join('\n')
+}
+
+applyLang('en')
+</script>
+</body>
+</html>
